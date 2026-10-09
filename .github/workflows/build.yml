@@ -18,7 +18,9 @@ jobs:
           python-version: "3.12"
       - run: pip install -r requirements.txt pyinstaller
       - run: flet pack app_consulta.py --name consulta_tablas
+      - run: Remove-Item -Recurse -Force build -ErrorAction SilentlyContinue
       - run: flet pack app_productos.py --name crud_productos
+      - run: Remove-Item -Recurse -Force build -ErrorAction SilentlyContinue
       - run: flet pack app_pedidos.py --name reporte_pedidos
       - run: copy config.ini dist\config.ini
       - uses: actions/upload-artifact@v4
