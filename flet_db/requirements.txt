@@ -1,0 +1,4 @@
+flet==0.28.3
+mysql-connector-python==9.0.0
+psycopg2-binary==2.9.9
+flet-web==0.28.3

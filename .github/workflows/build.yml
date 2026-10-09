@@ -1,0 +1,27 @@
+name: Build FLET
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: flet_db
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt pyinstaller
+      - run: flet pack app_consulta.py --name consulta_tablas
+      - run: flet pack app_productos.py --name crud_productos
+      - run: flet pack app_pedidos.py --name reporte_pedidos
+      - run: copy config.ini dist\config.ini
+      - uses: actions/upload-artifact@v4
+        with:
+          name: flet-windows
+          path: flet_db/dist/
